@@ -17,6 +17,14 @@ if RENDER_EXTERNAL_HOSTNAME:
     if RENDER_EXTERNAL_HOSTNAME not in ALLOWED_HOSTS:
         ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
+# Some PaaS environments do not always expose the external hostname at build time.
+# If ALLOWED_HOSTS ends up empty (which would cause Django to raise DisallowedHost
+# and return 400), allow all hosts as a pragmatic fallback so the app can start.
+# This is safe for short-term debugging; for production tighten this to the
+# explicit hostnames (set ALLOWED_HOSTS or RENDER_EXTERNAL_HOSTNAME env var).
+if not ALLOWED_HOSTS:
+    ALLOWED_HOSTS = ['*']
+
 # CSRF trusted origins: include render host if present, otherwise try env var
 csrf_from_env = os.environ.get('CSRF_TRUSTED_ORIGINS')
 if csrf_from_env:
