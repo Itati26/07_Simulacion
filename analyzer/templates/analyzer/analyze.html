@@ -25,7 +25,7 @@
         h6 {
             color: #94a3b8; /* Gris azulado para subtítulos */
             font-weight: 600;
-            margin-top: 15px; /* Espacio extra sobre los títulos de sección */
+            margin-top: 15px; 
         }
 
         .panda {
@@ -33,27 +33,22 @@
             display: inline-block;
             margin-right: 12px;
             vertical-align: middle;
-            color: #67e8f9; /* Color del ícono en el título */
+            color: #67e8f9; 
         }
 
-        /* Cards / sections (Elevados y con borde suave) */
+        /* Cards / sections */
         .table-wrapper, .plot-wrapper, .upload-form {
-            background: #334155; /* Fondo de tarjeta más oscuro */
+            background: #334155; 
             padding: 20px;
             border-radius: 16px;
-            border: 1px solid #475569; /* Borde más sutil */
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Sombra más profunda */
+            border: 1px solid #475569; 
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); 
             transition: transform .2s ease, box-shadow .2s ease;
-            margin-top: 20px; /* Separación entre cards */
+            margin-top: 20px; 
         }
 
-        .table-wrapper:hover, .plot-wrapper:hover, .upload-form:hover {
-            transform: none; /* Quitamos el efecto hover grande para evitar movimientos molestos */
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-        }
-        
         .upload-form {
-            margin-bottom: 30px; /* Más separación después del formulario */
+            margin-bottom: 30px; 
         }
 
         /* Table card header/body */
@@ -62,44 +57,45 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            background: #1e293b; /* Fondo de encabezado diferente */
+            background: #1e293b; 
             border-bottom: 1px solid #475569;
             border-top-left-radius: 14px;
             border-top-right-radius: 14px;
-            margin: -20px -20px 20px -20px; /* Extender al borde de la card */
+            margin: -20px -20px 20px -20px; 
         }
 
         .data-card-title {
-            color: #f1f5f9; /* Blanco para título de tarjeta */
+            color: #f1f5f9; 
             font-size: 18px;
             font-weight: 600;
             margin: 0;
         }
 
-        /* Table 📊 (Mejora de visibilidad de datos) */
+        /* Table 📊 -- ESTILOS CRÍTICOS REPARADOS PARA PANDAS/DATOS -- */
         .data-table-container {
             overflow-x: auto;
-            border-radius: 8px; /* Borde interno para la tabla */
-            /* Agregamos una altura máxima para que la tabla sea scrollable verticalmente */
+            border-radius: 8px; 
             max-height: 60vh; 
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra interna para indicar scroll */
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1); 
         }
         
-        /* Estilo para tablas generadas por Pandas */
-        .dataframe {
+        /* Aseguramos que la tabla generada por Python sea visible */
+        .data-table-container table,
+        .data-table-container .dataframe {
             border-collapse: collapse !important;
             width: 100% !important;
             margin: 0 !important;
-            color: #e2e8f0;
+            color: #e2e8f0; /* Color del texto visible */
             font-size: 13px !important;
-            min-width: 800px; /* Asegura que la tabla no sea demasiado estrecha */
+            min-width: 800px;
+            background: #334155; /* Fondo de la tabla visible */
         }
 
-        .dataframe th {
-            background: #1e293b !important; /* Fondo oscuro para encabezados */
-            border-bottom: 2px solid #67e8f9 !important; /* Borde de contraste */
+        .data-table-container th {
+            background: #1e293b !important; 
+            border-bottom: 2px solid #67e8f9 !important; 
             font-weight: 700 !important;
-            color: #67e8f9 !important;
+            color: #67e8f9 !important; /* Color de encabezado visible */
             padding: 12px 14px !important;
             text-align: left !important;
             position: sticky !important;
@@ -107,22 +103,22 @@
             z-index: 10 !important;
         }
 
-        .dataframe td {
+        .data-table-container td {
             border-bottom: 1px solid #475569 !important;
-            color: #f1f5f9 !important;
+            color: #f1f5f9 !important; /* Color de dato visible */
             padding: 10px 14px !important;
             vertical-align: middle !important;
         }
 
-        .dataframe tbody tr:nth-child(odd) {
+        .data-table-container tbody tr:nth-child(odd) {
             background: #334155 !important;
         }
 
-        .dataframe tbody tr:nth-child(even) {
-            background: #3f516a !important; /* Color ligeramente diferente */
+        .data-table-container tbody tr:nth-child(even) {
+            background: #3f516a !important;
         }
 
-        /* Sync bar (Mantenido funcional pero estilizado) */
+        /* Sync bar (Mantenido funcional) */
         .scroll-sync {
             overflow-x: auto;
             overflow-y: hidden;
@@ -158,6 +154,7 @@
             border-color: #67e8f9;
             color: #1e293b !important; 
             font-weight: 700;
+            transition: all .2s ease;
         }
 
         .btn-primary:hover, .btn-primary:focus {
@@ -168,36 +165,38 @@
             box-shadow: 0 6px 14px rgba(103, 232, 249, 0.4);
         }
 
-        /* Plots (Gráficos) 📈 - Diseño en una fila compacta */
+        /* Plots (Gráficos) 📈 */
         .plot-container-wrapper {
-            /* Nuevo contenedor para las gráficas */
             margin-top: 30px; 
             margin-bottom: 20px; 
         }
 
         .plot-wrapper {
-            padding: 12px; /* Menor padding */
+            padding: 12px; 
             background: #334155;
+            border-radius: 16px;
+            border: 1px solid #475569;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
         
         .plot-wrapper h6 {
-            font-size: 13px; /* Título de gráfica más pequeño */
+            font-size: 13px;
             margin-bottom: 8px;
             color: #67e8f9;
         }
 
         .plot-img {
             width: 100%;
-            border-radius: 8px; /* Borde más pequeño */
-            max-height: 180px; /* Altura máxima para hacerlas más compactas */
-            object-fit: contain; /* Asegura que la imagen se vea completa */
+            border-radius: 8px; 
+            max-height: 180px; 
+            object-fit: contain; 
             cursor: zoom-in;
         }
         
         .col-plot-4 {
-            /* Usaremos una cuadrícula de 4 columnas para que quepan todas en una fila */
             width: 25%;
             padding: 0 8px;
+            min-width: 200px; /* Aseguramos que no se achiquen demasiado en pantallas pequeñas */
         }
 
         /* Alertas (Para errores) */
@@ -211,7 +210,7 @@
             margin-top: 20px;
         }
 
-        /* Lightbox (Galería de imágenes) 🖼️ */
+        /* Lightbox (Galería de imágenes) 🖼️ - Mantenido */
         .lightbox-overlay {
             position: fixed;
             inset: 0;
@@ -262,12 +261,35 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="text-center"><span class="panda" role="img" aria-label="panda"></span>ITATI REYES REYES</h1>
+        <h1 class="text-center"><span class="panda" role="img" aria-label="panda"></span>PandasArff</h1>
         
         <div class="upload-form">
             <form method="post" enctype="multipart/form-data" novalidate>
                 {% csrf_token %}
 
+                <div class="mb-3">
+                    <label class="form-label">Selecciona fuente</label>
+                    <div>
+                        {% for radio in form.source %}
+                            <div class="form-check form-check-inline">
+                                {{ radio.tag }}
+                                <label class="form-check-label ms-1 me-3" for="{{ radio.id_for_label }}">{{ radio.choice_label }}</label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div id="upload-block" class="mb-3 row align-items-center">
+                    <div class="col-md-12">
+                        <label class="form-label">Subir archivo (.arff)</label>
+                        {{ form.arff_file }}
+                    </div>
+                </div>
+
+                <div id="github-block" class="mb-3" style="display:none;">
+                    <label class="form-label">URL del archivo en GitHub</label>
+                    {{ form.github_url }}
+                </div>
 
                 <div class="d-flex justify-content-end mt-2">
                     <button type="submit" class="btn btn-primary">Visualizar</button>
@@ -288,7 +310,7 @@
                 <div class="col-12">
                     <h6>Distribución de {{ protocol_col }} (4 vistas)</h6>
                 </div>
-                <div class="d-flex flex-row flex-wrap">
+                <div class="d-flex flex-row flex-wrap justify-content-start">
                     {% if plots.prot_full %}
                     <div class="col-plot-4">
                         <div class="plot-wrapper">
@@ -350,7 +372,6 @@
                     </div>
                 </div>
                 {% endif %}
-                
                 </div>
         {% endif %}
     </div>
@@ -393,7 +414,8 @@
                 parent.insertBefore(topSync, tableContainer);
 
                 const updateSync = () => {
-                    const table = tableContainer.querySelector('.dataframe'); // Usar .dataframe para ser más específico
+                    // Ahora buscamos la tabla dentro del contenedor
+                    const table = tableContainer.querySelector('table, .dataframe'); 
                     topSync.innerHTML = '';
                     if (table) {
                         const inner = document.createElement('div');
@@ -406,10 +428,11 @@
                 topSync.addEventListener('scroll', () => { tableContainer.scrollLeft = topSync.scrollLeft; });
                 tableContainer.addEventListener('scroll', () => { topSync.scrollLeft = tableContainer.scrollLeft; });
                 window.addEventListener('resize', updateSync);
-                updateSync();
+                // Pequeño delay para asegurar que el contenido dinámico de Pandas haya cargado
+                setTimeout(updateSync, 100); 
             }
 
-            // Lightbox gallery for plots
+            // Lightbox gallery for plots (Mantenido funcionalmente)
             const imgs = Array.from(document.querySelectorAll('.plot-img'));
             const overlay = document.getElementById('lightbox');
             const imgEl = document.getElementById('lightbox-img');
@@ -424,7 +447,6 @@
                 current = index;
                 const src = imgs[current].getAttribute('src');
                 const alt = imgs[current].getAttribute('alt') || '';
-                // Animación estilo iOS ajustada: clonar desde miniatura hacia el tamaño final real para evitar "salto" al final
                 const thumb = imgs[current];
                 const rect = thumb.getBoundingClientRect();
                 const clone = thumb.cloneNode(true);
@@ -436,13 +458,12 @@
                 clone.style.margin = 0;
                 clone.style.zIndex = 1100;
                 clone.style.transition = 'all .35s cubic-bezier(0.16, 0.68, 0.43, 0.99)';
-                clone.style.borderRadius = '12px'; /* Ajuste */
+                clone.style.borderRadius = '12px'; 
                 document.body.appendChild(clone);
 
-                // Pre-cargar para conocer proporción
                 const tempImg = new Image();
                 tempImg.onload = () => {
-                    const padding = 0.08; // 8% margen
+                    const padding = 0.08; 
                     const maxW = window.innerWidth * (1 - padding);
                     const maxH = window.innerHeight * (1 - padding);
                     const ratio = tempImg.naturalWidth / tempImg.naturalHeight || 1;
@@ -452,17 +473,14 @@
                     const targetLeft = (window.innerWidth - targetW)/2;
                     const targetTop = (window.innerHeight - targetH)/2;
 
-                    // Mostrar overlay; preparar imagen final con tamaño fijo para evitar "encogimiento" al terminar
                     overlay.classList.add('active');
                     overlay.setAttribute('aria-hidden', 'false');
                     imgEl.style.opacity = '0';
                     imgEl.style.transition = 'none';
                     imgEl.style.width = targetW + 'px';
                     imgEl.style.height = targetH + 'px';
-                    // También ajustar el contenedor para estabilizar el layout
                     const lbContent = overlay.querySelector('.lightbox-content');
                     if (lbContent) {
-                        // Fijar contenedor exactamente en el destino del clon para evitar "salto"
                         lbContent.style.position = 'fixed';
                         lbContent.style.left = targetLeft + 'px';
                         lbContent.style.top = targetTop + 'px';
@@ -471,7 +489,6 @@
                     }
                     imgEl.setAttribute('src', src);
                     imgEl.setAttribute('alt', alt);
-                    // No mostrar caption para evitar texto a la derecha
 
                     requestAnimationFrame(()=>{
                         clone.style.left = targetLeft + 'px';
@@ -483,7 +500,6 @@
 
                     clone.addEventListener('transitionend', ()=>{
                         clone.remove();
-                        // Mostrar ya la imagen grande; evitar segundo zoom
                         requestAnimationFrame(()=>{ imgEl.style.opacity = '1'; });
                     }, { once:true });
                 };
@@ -492,7 +508,6 @@
             function closeLightbox(){
                 overlay.classList.remove('active');
                 overlay.setAttribute('aria-hidden', 'true');
-                // Resetear tamaños para que el próximo cálculo se aplique limpio
                 imgEl.style.width = '';
                 imgEl.style.height = '';
                 const lbContent = overlay.querySelector('.lightbox-content');
