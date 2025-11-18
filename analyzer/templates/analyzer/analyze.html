@@ -225,12 +225,163 @@ h6 {
 }
 
 .lightbox-prev { left: 15px; }
-.lightbox-next { right: 15px; }
+lightbox-next { right: 15px; }
 
     </style>
 </head>
-<body>
 
-    <!-- TODO TU HTML ORIGINAL INTACTO -->
-    <!-- (CONTENIDO IGUAL, SOLO SE ALTERÓ EL DISEÑO) -->
+<body>
+<div class="container">
+
+<h1 class="text-center"><span class="panda">🐼</span>PandasArff</h1>
+
+<div class="upload-form">
+    <form method="post" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label class="form-label">Selecciona fuente</label>
+            <div>
+                {% for radio in form.source %}
+                    <div class="form-check form-check-inline">
+                        {{ radio.tag }}
+                        <label class="form-check-label ms-1 me-3" for="{{ radio.id_for_label }}">
+                            {{ radio.choice_label }}
+                        </label>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div id="upload-block" class="mb-3 row align-items-center">
+            <div class="col-md-12">
+                <label class="form-label">Subir archivo (.arff)</label>
+                {{ form.arff_file }}
+            </div>
+        </div>
+
+        <div id="github-block" class="mb-3" style="display:none;">
+            <label class="form-label">URL del archivo en GitHub</label>
+            {{ form.github_url }}
+        </div>
+
+        <div class="d-flex justify-content-end mt-2">
+            <button type="submit" class="btn btn-primary">Visualizar</button>
+        </div>
+
+    </form>
+</div>
+
+{% if error %}
+    <div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+
+{% if df_html %}
+
+<div class="row g-3 mb-4">
+
+{% if protocol_col %}
+    <div class="col-12">
+        <h6>Distribución de {{ protocol_col }} (4 vistas)</h6>
+    </div>
+
+    {% if plots.prot_full %}
+    <div class="col-md-3">
+        <div class="plot-wrapper">
+            <h6>Dataset completo</h6>
+            <img class="plot-img" src="data:image/png;base64,{{ plots.prot_full }}">
+        </div>
+    </div>
+    {% endif %}
+
+    {% if plots.prot_train %}
+    <div class="col-md-3">
+        <div class="plot-wrapper">
+            <h6>Train</h6>
+            <img class="plot-img" src="data:image/png;base64,{{ plots.prot_train }}">
+        </div>
+    </div>
+    {% endif %}
+
+    {% if plots.prot_val %}
+    <div class="col-md-3">
+        <div class="plot-wrapper">
+            <h6>Validación</h6>
+            <img class="plot-img" src="data:image/png;base64,{{ plots.prot_val }}">
+        </div>
+    </div>
+    {% endif %}
+
+    {% if plots.prot_test %}
+    <div class="col-md-3">
+        <div class="plot-wrapper">
+            <h6>Test</h6>
+            <img class="plot-img" src="data:image/png;base64,{{ plots.prot_test }}">
+        </div>
+    </div>
+    {% endif %}
+
+{% endif %}
+</div>
+
+<div class="table-wrapper">
+    <div class="data-card-header">
+        <span class="panda">🐼</span>
+        <div>
+            <p class="data-card-title">Contenido: {{ file_name }}</p>
+            <small>{{ num_rows }} filas × {{ num_cols }} columnas</small>
+        </div>
+    </div>
+
+    <div class="data-card-body">
+        <div class="data-table-container">
+            {{ df_html|safe }}
+        </div>
+    </div>
+</div>
+
+{% endif %}
+
+</div>
+
+<!-- LIGHTBOX HTML -->
+<div id="lightbox" class="lightbox-overlay">
+    <div class="lightbox-close">×</div>
+    <div class="lightbox-arrow lightbox-prev">‹</div>
+    <div class="lightbox-arrow lightbox-next">›</div>
+    <div class="lightbox-content">
+        <img id="lightbox-img">
+        <div id="lightbox-cap" class="lightbox-caption"></div>
+    </div>
+</div>
+
+<script>
+/* ------------ toggle upload/github ------------ */
+function toggleSource() {
+    const uploadBlock = document.getElementById('upload-block');
+    const githubBlock = document.getElementById('github-block');
+    const radios = document.querySelectorAll('input[name="source"]');
+
+    let val = 'upload';
+    radios.forEach(r => { if (r.checked) val = r.value; });
+
+    if (val === 'upload') {
+        uploadBlock.style.display = '';
+        githubBlock.style.display = 'none';
+    } else {
+        uploadBlock.style.display = 'none';
+        githubBlock.style.display = '';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const radios = document.querySelectorAll('input[name="source"]');
+    radios.forEach(r => r.addEventListener('change', toggleSource));
+    toggleSource();
+});
+</script>
+
+</body>
+</html>
+
 
