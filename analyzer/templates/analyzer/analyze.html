@@ -25,6 +25,7 @@
         h6 {
             color: #94a3b8; /* Gris azulado para subtítulos */
             font-weight: 600;
+            margin-top: 15px; /* Espacio extra sobre los títulos de sección */
         }
 
         .panda {
@@ -43,11 +44,16 @@
             border: 1px solid #475569; /* Borde más sutil */
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Sombra más profunda */
             transition: transform .2s ease, box-shadow .2s ease;
+            margin-top: 20px; /* Separación entre cards */
         }
 
         .table-wrapper:hover, .plot-wrapper:hover, .upload-form:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+            transform: none; /* Quitamos el efecto hover grande para evitar movimientos molestos */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        .upload-form {
+            margin-bottom: 30px; /* Más separación después del formulario */
         }
 
         /* Table card header/body */
@@ -70,51 +76,50 @@
             margin: 0;
         }
 
-        .data-card-body {
-            padding: 0; /* Ya tiene padding en .table-wrapper */
-            background: transparent;
-        }
-
-        /* Table 📊 */
-        .table {
-            margin: 0;
-            font-size: 14px;
-            border-collapse: collapse; /* Cambio: collapse para bordes más limpios */
-            width: 100%;
-            background: #334155;
-            color: #e2e8f0;
-        }
-
-        .table th {
-            background: #1e293b; /* Fondo oscuro para encabezados */
-            border-bottom: 2px solid #67e8f9; /* Borde de contraste */
-            font-weight: 700;
-            color: #67e8f9;
-            padding: 12px 14px;
-            text-align: left;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-
-        .table td {
-            border-bottom: 1px solid #475569;
-            color: #f1f5f9;
-            padding: 10px 14px;
-            vertical-align: middle;
-        }
-
-        .table tbody tr:nth-child(odd) {
-            background: #334155;
-        }
-
-        .table tbody tr:nth-child(even) {
-            background: #3f516a; /* Color ligeramente diferente */
-        }
-
+        /* Table 📊 (Mejora de visibilidad de datos) */
         .data-table-container {
             overflow-x: auto;
             border-radius: 8px; /* Borde interno para la tabla */
+            /* Agregamos una altura máxima para que la tabla sea scrollable verticalmente */
+            max-height: 60vh; 
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra interna para indicar scroll */
+        }
+        
+        /* Estilo para tablas generadas por Pandas */
+        .dataframe {
+            border-collapse: collapse !important;
+            width: 100% !important;
+            margin: 0 !important;
+            color: #e2e8f0;
+            font-size: 13px !important;
+            min-width: 800px; /* Asegura que la tabla no sea demasiado estrecha */
+        }
+
+        .dataframe th {
+            background: #1e293b !important; /* Fondo oscuro para encabezados */
+            border-bottom: 2px solid #67e8f9 !important; /* Borde de contraste */
+            font-weight: 700 !important;
+            color: #67e8f9 !important;
+            padding: 12px 14px !important;
+            text-align: left !important;
+            position: sticky !important;
+            top: 0 !important;
+            z-index: 10 !important;
+        }
+
+        .dataframe td {
+            border-bottom: 1px solid #475569 !important;
+            color: #f1f5f9 !important;
+            padding: 10px 14px !important;
+            vertical-align: middle !important;
+        }
+
+        .dataframe tbody tr:nth-child(odd) {
+            background: #334155 !important;
+        }
+
+        .dataframe tbody tr:nth-child(even) {
+            background: #3f516a !important; /* Color ligeramente diferente */
         }
 
         /* Sync bar (Mantenido funcional pero estilizado) */
@@ -123,7 +128,7 @@
             overflow-y: hidden;
             height: 12px;
             position: sticky;
-            top: 10px; /* Ajuste para verse mejor */
+            top: 10px; 
             z-index: 999;
             background: transparent;
             margin-bottom: 10px;
@@ -131,7 +136,7 @@
 
         .scroll-sync .sync-bar {
             height: 4px;
-            background: #67e8f9; /* Barra del color principal */
+            background: #67e8f9; 
             border-radius: 4px;
         }
 
@@ -145,27 +150,14 @@
             border: 1px solid #475569;
             color: #e2e8f0;
             box-shadow: none;
-            transition: border-color .15s ease, box-shadow .15s ease;
         }
-
-        .upload-form .form-control:focus {
-            border-color: #67e8f9;
-            box-shadow: 0 0 0 0.25rem rgba(103, 232, 249, 0.25);
-            background: #1e293b;
-            color: #e2e8f0;
-        }
-
-        .upload-form .form-control::placeholder {
-            color: #94a3b8;
-        }
-
+        
         /* Botones ✨ */
         .btn-primary {
             background-color: #67e8f9;
             border-color: #67e8f9;
-            color: #1e293b !important; /* Texto oscuro en botón claro */
+            color: #1e293b !important; 
             font-weight: 700;
-            transition: all .2s ease;
         }
 
         .btn-primary:hover, .btn-primary:focus {
@@ -176,30 +168,41 @@
             box-shadow: 0 6px 14px rgba(103, 232, 249, 0.4);
         }
 
-        /* Plots (Gráficos) 📈 */
+        /* Plots (Gráficos) 📈 - Diseño en una fila compacta */
+        .plot-container-wrapper {
+            /* Nuevo contenedor para las gráficas */
+            margin-top: 30px; 
+            margin-bottom: 20px; 
+        }
+
+        .plot-wrapper {
+            padding: 12px; /* Menor padding */
+            background: #334155;
+        }
+        
         .plot-wrapper h6 {
-            font-weight: 700;
-            font-size: 15px;
-            margin-bottom: 12px;
-            color: #f1f5f9;
+            font-size: 13px; /* Título de gráfica más pequeño */
+            margin-bottom: 8px;
+            color: #67e8f9;
         }
 
         .plot-img {
             width: 100%;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border-radius: 8px; /* Borde más pequeño */
+            max-height: 180px; /* Altura máxima para hacerlas más compactas */
+            object-fit: contain; /* Asegura que la imagen se vea completa */
             cursor: zoom-in;
-            transition: box-shadow .2s ease;
         }
         
-        .plot-img:focus {
-            outline: 2px solid #67e8f9;
-            outline-offset: 4px;
+        .col-plot-4 {
+            /* Usaremos una cuadrícula de 4 columnas para que quepan todas en una fila */
+            width: 25%;
+            padding: 0 8px;
         }
 
         /* Alertas (Para errores) */
         .alert-danger {
-            background-color: #ef4444; /* Rojo sólido */
+            background-color: #ef4444; 
             border-color: #dc2626;
             color: #ffffff;
             font-weight: 600;
@@ -212,7 +215,7 @@
         .lightbox-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.9); /* Fondo casi negro */
+            background: rgba(0, 0, 0, 0.9);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             display: none;
@@ -229,20 +232,17 @@
             max-height: 88vh;
             border-radius: 14px;
             box-shadow: 0 16px 40px rgba(0,0,0,0.8);
-            animation: fadeIn .3s ease-out; /* Animación de entrada suave */
         }
         .lightbox-caption { display:none; }
         .lightbox-close {
             position: absolute;
             top: 20px;
             right: 25px;
-            color: #67e8f9; /* Color del tema */
+            color: #67e8f9;
             font-size: 34px;
             cursor: pointer;
             text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
-            transition: color .2s ease;
         }
-        .lightbox-close:hover { color: #38bdf8; }
         .lightbox-arrow {
             position: absolute;
             top: 50%;
@@ -252,12 +252,7 @@
             cursor: pointer;
             padding: 15px 20px;
             user-select: none;
-            text-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
-            transition: color .2s ease;
         }
-        .lightbox-arrow:hover { color: #38bdf8; }
-        .lightbox-prev { left: 15px; }
-        .lightbox-next { right: 15px; }
 
         @keyframes fadeIn {
              from { opacity: 0; }
@@ -310,43 +305,46 @@
         {% endif %}
 
         {% if df_html %}
-            <div class="row g-3 mb-4 mt-4">
+            
+            <div class="row g-3 plot-container-wrapper">
                 {% if protocol_col %}
                 <div class="col-12">
                     <h6>Distribución de {{ protocol_col }} (4 vistas)</h6>
                 </div>
-                {% if plots.prot_full %}
-                <div class="col-md-3">
-                    <div class="plot-wrapper">
-                        <h6>Dataset completo</h6>
-                        <img class="plot-img" src="data:image/png;base64,{{ plots.prot_full }}" alt="protocol_type dataset" />
+                <div class="d-flex flex-row flex-wrap">
+                    {% if plots.prot_full %}
+                    <div class="col-plot-4">
+                        <div class="plot-wrapper">
+                            <h6>Dataset completo</h6>
+                            <img class="plot-img" src="data:image/png;base64,{{ plots.prot_full }}" alt="protocol_type dataset" />
+                        </div>
                     </div>
-                </div>
-                {% endif %}
-                {% if plots.prot_train %}
-                <div class="col-md-3">
-                    <div class="plot-wrapper">
-                        <h6>Train</h6>
-                        <img class="plot-img" src="data:image/png;base64,{{ plots.prot_train }}" alt="protocol_type train" />
+                    {% endif %}
+                    {% if plots.prot_train %}
+                    <div class="col-plot-4">
+                        <div class="plot-wrapper">
+                            <h6>Train</h6>
+                            <img class="plot-img" src="data:image/png;base64,{{ plots.prot_train }}" alt="protocol_type train" />
+                        </div>
                     </div>
-                </div>
-                {% endif %}
-                {% if plots.prot_val %}
-                <div class="col-md-3">
-                    <div class="plot-wrapper">
-                        <h6>Validación</h6>
-                        <img class="plot-img" src="data:image/png;base64,{{ plots.prot_val }}" alt="protocol_type val" />
+                    {% endif %}
+                    {% if plots.prot_val %}
+                    <div class="col-plot-4">
+                        <div class="plot-wrapper">
+                            <h6>Validación</h6>
+                            <img class="plot-img" src="data:image/png;base64,{{ plots.prot_val }}" alt="protocol_type val" />
+                        </div>
                     </div>
-                </div>
-                {% endif %}
-                {% if plots.prot_test %}
-                <div class="col-md-3">
-                    <div class="plot-wrapper">
-                        <h6>Test</h6>
-                        <img class="plot-img" src="data:image/png;base64,{{ plots.prot_test }}" alt="protocol_type test" />
+                    {% endif %}
+                    {% if plots.prot_test %}
+                    <div class="col-plot-4">
+                        <div class="plot-wrapper">
+                            <h6>Test</h6>
+                            <img class="plot-img" src="data:image/png;base64,{{ plots.prot_test }}" alt="protocol_type test" />
+                        </div>
                     </div>
+                    {% endif %}
                 </div>
-                {% endif %}
                 {% endif %}
             </div>
 
@@ -369,41 +367,14 @@
             <div class="row mt-4 g-3">
                 {% if plots.split_sizes %}
                 <div class="col-md-6">
-                    </div>
-                {% if plots.prot_full %}
-                <div class="col-md-3">
                     <div class="plot-wrapper">
-                        <h6>Dataset completo</h6>
-                        <img class="plot-img" src="data:image/png;base64,{{ plots.prot_full }}" alt="protocol_type dataset" />
+                        <h6>Tamaños de División</h6>
+                         <img class="plot-img" src="data:image/png;base64,{{ plots.split_sizes }}" alt="Division sizes plot" style="max-height: 200px;" />
                     </div>
                 </div>
                 {% endif %}
-                {% if plots.prot_train %}
-                <div class="col-md-3">
-                    <div class="plot-wrapper">
-                        <h6>Train</h6>
-                        <img class="plot-img" src="data:image/png;base64,{{ plots.prot_train }}" alt="protocol_type train" />
-                    </div>
+                
                 </div>
-                {% endif %}
-                {% if plots.prot_val %}
-                <div class="col-md-3">
-                    <div class="plot-wrapper">
-                        <h6>Validación</h6>
-                        <img class="plot-img" src="data:image/png;base64,{{ plots.prot_val }}" alt="protocol_type val" />
-                    </div>
-                </div>
-                {% endif %}
-                {% if plots.prot_test %}
-                <div class="col-md-3">
-                    <div class="plot-wrapper">
-                        <h6>Test</h6>
-                        <img class="plot-img" src="data:image/png;base64,{{ plots.prot_test }}" alt="protocol_type test" />
-                    </div>
-                </div>
-                {% endif %}
-                {% endif %}
-            </div>
         {% endif %}
     </div>
     <div id="lightbox" class="lightbox-overlay" role="dialog" aria-modal="true" aria-hidden="true">
@@ -445,7 +416,7 @@
                 parent.insertBefore(topSync, tableContainer);
 
                 const updateSync = () => {
-                    const table = tableContainer.querySelector('table');
+                    const table = tableContainer.querySelector('.dataframe'); // Usar .dataframe para ser más específico
                     topSync.innerHTML = '';
                     if (table) {
                         const inner = document.createElement('div');
